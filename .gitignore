@@ -10,3 +10,5 @@ build/
 out/
 .vercel/
 .netlify/
+node_modules/
+.next/
