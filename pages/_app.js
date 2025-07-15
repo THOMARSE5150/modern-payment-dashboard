@@ -1,9 +1,20 @@
-import '@/styles/globals.css'
+import '../styles/globals.css'
+import { Suspense } from 'react'
 
-export default function App({ Component, pageProps }) {
+function Loading() {
+  return <div>Loading...</div>
+}
+
+export default function MyApp({ Component, pageProps }) {
   return (
-    <main className="dark font-sans bg-primary min-h-screen">
+    <Suspense fallback={<Loading />}>
       <Component {...pageProps} />
-    </main>
+    </Suspense>
   )
+}
+
+// Add build metadata
+if (typeof window !== 'undefined') {
+  console.log('Build Time:', process.env.NEXT_PUBLIC_BUILD_TIME)
+  console.log('Author:', process.env.NEXT_PUBLIC_AUTHOR)
 }

@@ -1,0 +1,25 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npm run build"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+numReplicas = 1
+
+[[deploy.regions]]
+name = "asia-southeast1-eqsg3a"
+numReplicas = 1
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[[phases.build.steps]]
+name = "Install Dependencies"
+command = "npm install"
+
+[[phases.build.steps]]
+name = "Build Application"
+command = "npm run build"
